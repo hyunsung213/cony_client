@@ -41,7 +41,11 @@ export default function GameInfoCard({ game }: { game?: GameDetail }) {
           </div>
           <div className="flex items-center justify-between">
             <span className="text-gray-500">경기 시간</span>
-            <span className="font-semibold">{dateTime.toFormat("HH:mm")}</span>
+            <span className="font-semibold">
+              {`${dateTime.toFormat("HH:mm")} ~ ${dateTime
+                .plus({ hours: 2 })
+                .toFormat("HH:mm")}`}
+            </span>{" "}
           </div>
 
           {/* 인원 */}
