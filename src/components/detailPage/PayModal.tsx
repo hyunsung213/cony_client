@@ -80,8 +80,8 @@ export default function PayModal({
         {step === 1 && (
           <>
             <div className="grid gap-5 py-5 text-sm sm:text-base">
-              <div className="grid items-center grid-cols-4 gap-4">
-                <Label htmlFor="name" className="text-right">
+              <div className="grid items-center grid-cols-1 gap-4 sm:grid-cols-4">
+                <Label htmlFor="name" className="text-right sm:text-right">
                   이름
                 </Label>
                 <Input
@@ -89,12 +89,12 @@ export default function PayModal({
                   name="userName"
                   value={userInfo?.userName}
                   onChange={handleInputChange}
-                  className="col-span-3"
+                  className="w-full"
                   placeholder="홍길동"
                 />
               </div>
-              <div className="grid items-center grid-cols-4 gap-4">
-                <Label htmlFor="phone" className="text-right">
+              <div className="grid items-center grid-cols-1 gap-4 sm:grid-cols-4">
+                <Label htmlFor="phone" className="text-right sm:text-right">
                   전화번호
                 </Label>
                 <Input
@@ -102,12 +102,12 @@ export default function PayModal({
                   name="userPhoneNum"
                   value={userInfo?.userPhoneNum}
                   onChange={handleInputChange}
-                  className="col-span-3"
+                  className="w-full"
                   placeholder="010-1234-5678"
                 />
               </div>
-              <div className="grid items-center grid-cols-4 gap-4">
-                <Label htmlFor="email" className="text-right">
+              <div className="grid items-center grid-cols-1 gap-4 sm:grid-cols-4">
+                <Label htmlFor="email" className="text-right sm:text-right">
                   이메일
                 </Label>
                 <Input
@@ -115,7 +115,7 @@ export default function PayModal({
                   name="userEmail"
                   value={userInfo?.userEmail}
                   onChange={handleInputChange}
-                  className="col-span-3"
+                  className="w-full"
                   placeholder="example@email.com"
                 />
               </div>

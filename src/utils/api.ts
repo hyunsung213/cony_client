@@ -10,6 +10,8 @@ apiClient.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
+  console.log("API 요청:", config.method?.toUpperCase(), config.url);
   return config;
 });
 

@@ -214,7 +214,7 @@ export default function GameDetailPage() {
             <PlaceOptionCard option={game?.Place?.Option || PlaceBasicOption} />
             <div className="my-2 border-t border-blue-400" /> {/* 구분선 */}
             {/* {game?.Us && <RateCard users={game.Users} />} */}
-            <div className="my-2 border-t border-blue-400" /> {/* 구분선 */}
+            {/* <div className="my-2 border-t border-blue-400" /> 구분선 */}
             <PlaceNoteCard note={game?.Place?.Note || PlaceBasicNote} />
             <div className="my-2 border-t border-blue-400" /> {/* 구분선 */}
           </div>
@@ -222,9 +222,9 @@ export default function GameDetailPage() {
 
         <div className="w-full space-y-4 lg:sticky lg:top-24 lg:self-start lg:w-1/2">
           {/* 인기 게임 카드 */}
-          <div className="hidden lg:block">
+          {/* <div className="hidden lg:block">
             <HotGameCard />
-          </div>
+          </div> */}
 
           {/* 게임 정보 카드 - PC에서만 보임 */}
           <div className="hidden lg:block">

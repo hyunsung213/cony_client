@@ -92,11 +92,11 @@ export default function GameList() {
   // 주소 구까지만 나타내기
   // "구"까지만 추출하는 함수
   const toDistrictOnly = (address: string) => {
-    if (!address) return "서울특별시";
+    if (!address) return "인천광역시";
 
     // "중구", "강남구", "마포구" 등 "구"로 끝나는 단어 추출
     const match = address.match(/([가-힣]+구)/);
-    return match ? match[0] : "서울특별시";
+    return match ? match[0] : "인천광역시";
   };
 
   useEffect(() => {
