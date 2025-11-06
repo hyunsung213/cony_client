@@ -25,6 +25,7 @@ import { PlaceDetail } from "@/utils/interface/place";
 import { postGame, postPhoto } from "@/utils/post";
 import { deletePhoto } from "@/utils/delete";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import { Slider } from "@/components/ui/slider";
 
 interface Photo {
   photoId: number;
@@ -155,6 +156,7 @@ export default function PlaceManagementPage() {
                   <DialogTitle>게임 생성</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-3">
+                  {/* 날짜 선택 */}
                   <div>
                     <Label>날짜</Label>
                     <Input
@@ -165,45 +167,126 @@ export default function PlaceManagementPage() {
                       }
                     />
                   </div>
+
+                  {/* 시간 선택 */}
                   <div>
                     <Label>시간</Label>
-                    <Input
-                      type="time"
-                      value={gameData.time}
-                      onChange={(e) =>
-                        setGameData({ ...gameData, time: e.target.value })
-                      }
-                    />
+                    <div className="flex gap-3 mt-1">
+                      {/* 시 선택 */}
+                      <Select
+                        value={gameData.time.split(":")[0] || ""}
+                        onValueChange={(hour) => {
+                          const [_, minute = "00"] = gameData.time.split(":");
+                          setGameData({
+                            ...gameData,
+                            time: `${hour}:${minute}`,
+                          });
+                        }}
+                      >
+                        <SelectTrigger className="w-1/2">
+                          <SelectValue placeholder="시" />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-60">
+                          {Array.from({ length: 18 }, (_, i) => i + 6).map(
+                            (hour) => (
+                              <SelectItem
+                                key={hour}
+                                value={String(hour).padStart(2, "0")}
+                              >
+                                {hour}시
+                              </SelectItem>
+                            )
+                          )}
+                        </SelectContent>
+                      </Select>
+
+                      {/* 분 선택 */}
+                      <Select
+                        value={gameData.time.split(":")[1] || ""}
+                        onValueChange={(minute) => {
+                          const [hour = "06"] = gameData.time.split(":");
+                          setGameData({
+                            ...gameData,
+                            time: `${hour}:${minute}`,
+                          });
+                        }}
+                      >
+                        <SelectTrigger className="w-1/2">
+                          <SelectValue placeholder="분" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {["00", "10", "20", "30", "40", "50"].map(
+                            (minute) => (
+                              <SelectItem key={minute} value={minute}>
+                                {minute}분
+                              </SelectItem>
+                            )
+                          )}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {gameData.time && (
+                      <p className="mt-2 text-sm font-semibold text-blue-600">
+                        선택된 시간: {gameData.time}
+                      </p>
+                    )}
                   </div>
-                  <div>
+
+                  {/* 인원 선택 (슬라이더) */}
+                  <div className="mt-4">
                     <Label>인원</Label>
-                    <Input
-                      type="number"
-                      value={gameData.numOfMember}
-                      onChange={(e) =>
-                        setGameData({
-                          ...gameData,
-                          numOfMember: Number(e.target.value),
-                        })
-                      }
-                      placeholder="예: 8"
-                    />
+                    <div className="mt-3">
+                      <Slider
+                        value={[gameData.numOfMember]}
+                        onValueChange={(val) =>
+                          setGameData({
+                            ...gameData,
+                            numOfMember: Math.round(val[0]),
+                          })
+                        }
+                        min={2}
+                        max={8}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between mt-2 text-sm text-gray-600">
+                        <span>2명</span>
+                        <span className="font-semibold text-blue-600">
+                          {gameData.numOfMember}명
+                        </span>
+                        <span>8명</span>
+                      </div>
+                    </div>
                   </div>
-                  <div>
+
+                  {/* 가격 선택 (슬라이더) */}
+                  <div className="mt-4">
                     <Label>가격</Label>
-                    <Input
-                      type="number"
-                      value={gameData.cost}
-                      onChange={(e) =>
-                        setGameData({
-                          ...gameData,
-                          cost: Number(e.target.value),
-                        })
-                      }
-                      placeholder="예: 10000"
-                    />
+                    <div className="mt-3">
+                      <Slider
+                        value={[gameData.cost]}
+                        onValueChange={(val) =>
+                          setGameData({
+                            ...gameData,
+                            cost: Math.round(val[0] / 1000) * 1000,
+                          })
+                        }
+                        min={0}
+                        max={20000}
+                        step={1000}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between mt-2 text-sm text-gray-600">
+                        <span>0원</span>
+                        <span className="font-semibold text-blue-600">
+                          {gameData.cost.toLocaleString()}원
+                        </span>
+                        <span>20,000원</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
                 <DialogFooter>
                   <Button onClick={handleCreateGame}>생성</Button>
                 </DialogFooter>
