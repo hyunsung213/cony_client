@@ -58,10 +58,18 @@ export default function GameInfoCard({ game }: { game?: GameDetail }) {
             <span className="text-gray-500">D-Day</span>
             <span
               className={`font-semibold ${
-                diff === 0 ? "text-green-600" : "text-red-500"
+                diff > 0
+                  ? "text-red-500" // 앞으로 남음
+                  : diff === 0
+                  ? "text-red-500" // 당일
+                  : "text-green-600" // 이미 지남
               }`}
             >
-              {diff === 0 ? "D-DAY" : `D${diff}`}
+              {diff > 0
+                ? `D-${diff}`
+                : diff === 0
+                ? "TODAY"
+                : `D+${Math.abs(diff)}`}
             </span>
           </div>
 

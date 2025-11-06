@@ -112,7 +112,6 @@ export default function GameDetailPage() {
   return (
     <div className="max-w-screen-lg p-4 mx-auto space-y-6">
       <Dialog open={open} onOpenChange={setOpen}>
-        {/* 상단 이미지 영역 */}
         {/* 상단 이미지 영역 (반응형) */}
         <div
           className={`w-full gap-4 sm:p-4 overflow-hidden ${bgColor.skyblue} border border-gray-200 shadow-sm cursor-pointer rounded-lg 
@@ -122,11 +121,13 @@ export default function GameDetailPage() {
           {/* 메인 이미지 */}
           <div className="w-full sm:col-span-2">
             {images[0] ? (
-              <img
-                src={images[0]}
-                alt={game?.Place?.placeName || "장소 이미지"}
-                className="object-cover w-full h-full rounded-lg max-h-[240px] sm:max-h-none"
-              />
+              <div className="w-full h-[240px] sm:h-[400px] overflow-hidden rounded-lg">
+                <img
+                  src={images[0]}
+                  alt={game?.Place?.placeName || "장소 이미지"}
+                  className="object-cover w-full h-full"
+                />
+              </div>
             ) : (
               <div className="flex items-center justify-center w-full h-[240px] rounded-lg bg-gray-100 text-sm text-gray-500">
                 이미지 없음
@@ -137,15 +138,18 @@ export default function GameDetailPage() {
           {/* 서브 이미지 (PC만 보임) */}
           <div className="hidden sm:grid sm:grid-cols-2 sm:gap-4 sm:col-span-2">
             {[1, 2, 3, 4].map((idx) => (
-              <div key={idx} className="w-full aspect-[4/3] relative">
+              <div
+                key={idx}
+                className="w-full h-[200px] relative overflow-hidden rounded-lg"
+              >
                 {images[idx] ? (
                   <img
                     src={images[idx]}
                     alt={`image-${idx}`}
-                    className="absolute inset-0 object-cover w-full h-full rounded-lg"
+                    className="absolute inset-0 object-cover w-full h-full"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center w-full h-full text-sm text-gray-500 bg-gray-100 rounded-lg">
+                  <div className="absolute inset-0 flex items-center justify-center w-full h-full text-sm text-gray-500 bg-gray-100">
                     이미지 없음
                   </div>
                 )}
