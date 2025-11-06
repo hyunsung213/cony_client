@@ -79,9 +79,13 @@ export default function PayModal({
 
         {step === 1 && (
           <>
-            <div className="grid gap-5 py-5 text-sm sm:text-base">
-              <div className="grid items-center grid-cols-1 gap-4 sm:grid-cols-4">
-                <Label htmlFor="name" className="text-right sm:text-right">
+            <div className="grid gap-6 py-6 text-base sm:text-lg">
+              {/* 이름 */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
+                <Label
+                  htmlFor="name"
+                  className="font-medium text-gray-700 sm:w-24"
+                >
                   이름
                 </Label>
                 <Input
@@ -89,12 +93,17 @@ export default function PayModal({
                   name="userName"
                   value={userInfo?.userName}
                   onChange={handleInputChange}
-                  className="w-full"
+                  className="flex-1 text-base h-11"
                   placeholder="홍길동"
                 />
               </div>
-              <div className="grid items-center grid-cols-1 gap-4 sm:grid-cols-4">
-                <Label htmlFor="phone" className="text-right sm:text-right">
+
+              {/* 전화번호 */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
+                <Label
+                  htmlFor="phone"
+                  className="font-medium text-gray-700 sm:w-24"
+                >
                   전화번호
                 </Label>
                 <Input
@@ -102,12 +111,17 @@ export default function PayModal({
                   name="userPhoneNum"
                   value={userInfo?.userPhoneNum}
                   onChange={handleInputChange}
-                  className="w-full"
+                  className="flex-1 text-base h-11"
                   placeholder="010-1234-5678"
                 />
               </div>
-              <div className="grid items-center grid-cols-1 gap-4 sm:grid-cols-4">
-                <Label htmlFor="email" className="text-right sm:text-right">
+
+              {/* 이메일 */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
+                <Label
+                  htmlFor="email"
+                  className="font-medium text-gray-700 sm:w-24"
+                >
                   이메일
                 </Label>
                 <Input
@@ -115,20 +129,23 @@ export default function PayModal({
                   name="userEmail"
                   value={userInfo?.userEmail}
                   onChange={handleInputChange}
-                  className="w-full"
+                  className="flex-1 text-base h-11"
                   placeholder="example@email.com"
                 />
               </div>
             </div>
-            <p className="px-1 text-xs leading-relaxed text-red-600">
+
+            {/* 안내문구 */}
+            <p className="px-1 text-sm leading-relaxed text-red-600">
               ❗️ <span className="font-bold">계좌이체 시 입금자명</span>은
               반드시 신청자 이름과 동일해야 합니다.
             </p>
-            <p className="px-1 mt-1 text-xs leading-relaxed text-gray-700">
+            <p className="px-1 mt-2 text-sm leading-relaxed text-gray-700">
               ❗️ 취소 시 연락 바랍니다.{" "}
               <span className="font-bold">010-2655-6262</span>
             </p>
-            <DialogFooter>
+
+            <DialogFooter className="mt-6">
               <Button variant="ghost" onClick={handleClose}>
                 취소
               </Button>
