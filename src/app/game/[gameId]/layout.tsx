@@ -5,18 +5,14 @@ import { getGameDetail } from "@/utils/get";
 
 type Props = {
   children: ReactNode;
-  params: { id: string };
+  params: { gameId: string }; // Next.js가 전달하는 params
 };
 
 // ----------------------------
-// layout 단에서 동적 메타 생성
+// 서버 컴포넌트 전용: OG 메타 동적 생성
 // ----------------------------
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const gameId = Number(params.id);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const gameId = Number(params.gameId);
   const game = await getGameDetail(gameId);
 
   const imageUrl = game?.Place?.Photos?.[0]
