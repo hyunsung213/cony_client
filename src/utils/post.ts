@@ -21,7 +21,14 @@ export async function postGame(game: IGame) {
 // 게임 참가하기
 export async function postPayment(payment: IPayment) {
   try {
-    const response = await apiClient.post(`/payments/`, payment);
+    // 전화번호 숫자만 남기고 정제
+    const cleanPhone = payment.userPhoneNum.replace(/\D/g, "");
+
+    const response = await apiClient.post(`/payments/`, {
+      ...payment,
+      userPhoneNum: cleanPhone,
+    });
+
     console.log("게임 참가 성공: ", response.data);
     return response.data;
   } catch (error) {
