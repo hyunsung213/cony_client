@@ -46,6 +46,10 @@ export default function PlaceManagementPage() {
     cost: 0,
   });
 
+  const toKST = (hour: string) => {
+    return String((parseInt(hour) + 9) % 24).padStart(2, "0");
+  };
+
   const fetchPlaces = async () => {
     const data = await getAllPlaceDetail();
     setPlaces(data || []);
@@ -177,9 +181,10 @@ export default function PlaceManagementPage() {
                         value={gameData.time.split(":")[0] || ""}
                         onValueChange={(hour) => {
                           const [_, minute = "00"] = gameData.time.split(":");
+                          const kstHour = toKST(hour);
                           setGameData({
                             ...gameData,
-                            time: `${hour}:${minute}`,
+                            time: `${kstHour}:${minute}`,
                           });
                         }}
                       >

@@ -27,6 +27,7 @@ import { bgColor, fontColor } from "@/styles/color";
 import PayModal from "@/components/detailPage/PayModal";
 import { GameDetail } from "@/utils/interface/game";
 import { getGameDetail } from "@/utils/get";
+import GameTimeInfoCard from "@/components/detailPage/GameTimeInfoCard";
 
 interface Props {
   params: Promise<{ gameId: string }>;
@@ -210,10 +211,13 @@ export default function GameDetailPage() {
               </Button>
             </div>
           </div>
-          <div className="w-full my-2 border-t border-blue-400" />{" "}
           {/* 구분선 */}
+          <div className="w-full my-2 border-t border-blue-400" />{" "}
           {/* 왼쪽 메인 정보 */}
           <div className="w-full space-y-4 pointer-events-none lg:flex-2">
+            {/* 경기 시간 정보 카드 */}
+            <GameTimeInfoCard date={game?.date || ""} />
+            <div className="my-2 border-t border-blue-400" /> {/* 구분선 */}
             {/* 편의시설 & 상세 정보 */}
             <PlaceOptionCard option={game?.Place?.Option || PlaceBasicOption} />
             <div className="my-2 border-t border-blue-400" /> {/* 구분선 */}
